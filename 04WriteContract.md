@@ -1,7 +1,8 @@
 # 컨트랙트 계속 작성
 
 ## owner 변수 접근 변경과 get함수 추가
-3장에서는 owner변수에 직접 접근해서 값을 가져왔는데 이 번에는 get함수를 만들어서 접접근해봅니다. 코드를 아래와 같이 변경합니다.
+3장에서는 owner변수에 직접 접근해서 값을 가져왔는데 이 번에는 get함수를 만들어서 접근해봅니다. 
+코드를 아래와 같이 변경합니다.
  
 ```
 pragma solidity ^0.4.22;
@@ -74,13 +75,19 @@ contract Voting {
 }
 ```
 
-후보자는 **struct** 키워드를 사용해서 Candidate 구조체로 선언합니다. Candidate 구조체를 선언합니다. Candidata에는 string name과 uint8 voteCount를 요소로 갖습니다.
-uint8 은 정수형이며 변수의 크기가 8비트를 의미합니다. 솔리디티에서는 uin8 ~ unit256 까지 지원합니다. candidat를 원소를 갖는 배열을 **[]** 예약어를 이용해 선언합니다.
+후보자는 **struct** 키워드를 사용해서 Candidate 구조체로 선언합니다.
+Candidata는 string name과 uint8 voteCount를 요소로 갖습니다.
 
-후보자를 등록하는 함수 addCandidate는 파라미터로 name을 받고 Candidate()를 통해서 새로운 후보자를 생성하고 배열의 push 함수를 이용해서 candidateList에 추가합니다.
+uint8 은 정수형이며 변수의 크기가 8비트를 의미합니다.
+솔리디티에서는 uin8 ~ unit256 까지 지원합니다.
+candidate를 요소로 갖는 배열을 **[]** 예약어를 이용해 선언합니다.
+
+후보자를 등록하는 함수 addCandidate는 파라미터로 name을 받고
+Candidate()를 통해서 새로운 후보자를 생성하고 배열의 push 함수를 이용해서 candidateList에 추가합니다.
 
 getCandidate함수는 후보자의 아이디를 받고 해당하는 후보자의 이름과 보팅 수를 반환합니다.
-솔리디티에서는 반환 값을 여러 개를 가질 수 있습니다. **returns**에서 반환 형과 수를 명시합니다.
+솔리디티에서는 반환 값을 여러 개를 가질 수 있습니다.
+**returns**에서 반환 형과 수를 명시합니다.
 
 truffle compile, truffle migrate를 수행하고 트러플 콘솔로 들어갑니다.
 park라는 후보자를 addCandidate함수를 사용해서 등록합니다.
