@@ -75,21 +75,21 @@ i.getVoter(0)
         </table>
         <hr>
         <br>
-        <table class="table"> 
-        <thead> 
-          <th>Address</th> 
-          <th>Vote Right</th> 
-        </thead> 
-        <tbody class="voterList"></tbody> 
+        <table class="table">
+        <thead>
+          <th>Address</th>
+          <th>Vote Right</th>
+        </thead>
+        <tbody class="voterList"></tbody>
         </table>
     </div>
-</div> 
+</div>
 ```
 
 ## app.js render 함수 수정하기
 
-후보자를 리스팅한 후, 유권자를 리스팅을 합니다. 
-방법은 후보자를 리스팅 했던 것과 동일합니다. 
+후보자를 리스팅한 후, 유권자를 리스팅을 합니다.
+방법은 후보자를 리스팅 했던 것과 동일합니다.
 ***(리스팅하는 게 중복이네요. 리팩토링을 하려면 어떻게 해야할까요?)***
 
 ```
@@ -118,7 +118,7 @@ render: function(){
         votingInstance.getCandidate(i).then(function(candidate){
           var name = candidate[0];
           var voteCount = candidate[1];
-          var candidateTemp = "<tr><th>" + name + "</th><td>" + voteCount + "</td></tr>"; 
+          var candidateTemp = "<tr><th>" + name + "</th><td>" + voteCount + "</td></tr>";
           candidateList.append(candidateTemp);
         });
       }
@@ -131,7 +131,7 @@ render: function(){
         votingInstance.getVoter(i).then(function(voter){
           var address = voter[0];
           var right = voter[1];
-          var voterTemp = "<tr><th>" + address + "</th><td>" + right + "</td></tr>"; 
+          var voterTemp = "<tr><th>" + address + "</th><td>" + right + "</td></tr>";
           voterList.append(voterTemp);
         });
       }
