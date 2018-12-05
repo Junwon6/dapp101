@@ -4,9 +4,12 @@
 ## Voting.sol 수정하기
 
 Voter 구조체를 address와 투표권한을 갖는 요소로 정의합니다.
-mapping 타입이라는 새로운 형을 선언하였습니다. mapping은 해쉬테이블 또는 딕셔너리 타입과 비슷하며 key, value 를 사용해서 자료를 저장할 수 있습니다.
+mapping 타입이라는 새로운 형을 선언하였습니다.
+mapping은 해쉬테이블 또는 딕셔너리 타입과 비슷하며 key, value 를 사용해서 자료를 저장할 수 있습니다.
 
-mapping (uint => Voter) 로 선언을 하면 key의 자료형은 uint, value의 자료형은 구조체 Voter로 지정한 것입니다. 예를 들어 voterList[0] = Voter(0x1241412, true); 이렇게 사용할 수 있습니다.
+mapping (uint => Voter) 로 선언을 하면 k
+ey의 자료형은 uint, value의 자료형은 구조체 Voter로 지정한 것입니다.
+예를 들어 voterList[0] = Voter(0x1241412, true); 이렇게 사용할 수 있습니다.
 
 mapping은 몇 개가 저장되어 있는지 알 수 없기 때문에 길이를 저장할 변수 voterCount를 선언합니다.
 ***(후보자를 등록할 때는 array를 사용했고 유권자를 등록할 때는 mapping 사용했습니다. 어떤게 더 좋을까요?)***
@@ -21,7 +24,7 @@ mapping (uint => Voter) private voterList;
 uint8 private voterCount;
 ```
 
-후보자를 등록할 addVoter를 추가하고, 후보자의 정보와 후보자가 총 몇명 등록됐는지를 반환하는 함수를 정의합니다. 
+후보자를 등록할 addVoter를 추가하고, 후보자의 정보와 후보자가 총 몇명 등록됐는지를 반환하는 함수를 정의합니다.
 
 ```
 function addVoter (address _voter) public {
@@ -39,6 +42,7 @@ function getVoterCount() public view returns (uint8){
 ```
  
 Voting.sol을 수정했으면 컴파일, 배포를 다시 합니다.
+
 ```
 truffle compile
 truffle migrate --reset
