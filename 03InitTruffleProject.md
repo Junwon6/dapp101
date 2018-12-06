@@ -115,9 +115,9 @@ migrations폴더에 ~_voting.js 가 생성됩니다.
 ```
 var Voting = artifacts.require("Voting");
 
-module.exports = function(deployer) { 
-  // Use deployer to state migration tasks. 
-  deployer.deploy(Voting); 
+module.exports = function(deployer) {
+  // Use deployer to state migration tasks.
+  deployer.deploy(Voting);
 };
 ```
 
@@ -140,10 +140,15 @@ truffle console
 
 ```
 Voting.deployed().then(function(instance) { data = instance });
+```
+명령어가 실행되면 undefined 가 반환됩니다.
+그러면 truffle console에서 data를 입력합니다.
+
+````
 data
 ```
 
-를 입력해보면 배포된 컨트랙트 정보가 출력됩니다. 
+를 입력해보면 배포된 컨트랙트 정보가 출력됩니다.
 Voting 컨트랙트의 owner변수를 출력해보겠습니다.
 ```
 data.owner();
