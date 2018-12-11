@@ -9,6 +9,8 @@ function vote(uint8 _id) public {
 ```
 
 트러플 콘솔로 이동해서 직접 보팅 후에 결과를 확인해봅니다.
+(아래 보팅을 하기 전에 컨트랙트에 후보자와 유권자가 등록이 되어 있어야 합니다! 7장 참조)
+
 ```
 truffle console
 Voting.deployed().then(function(ins){i=ins;});
@@ -19,7 +21,7 @@ lite-server에서도 확인해 볼 수 있습니다.
  
 ## vote 함수 개선하기 - 유효한 후보자에게만 투표하게 하기
 
- 위 함수는 후보자로 등록되어 있지 않는 사람에게도 투표할 수 있습니다. 
+ 위 함수는 후보자로 등록되어 있지 않는 사람에게도 투표할 수 있습니다.
  이걸 현재 candidatesList에 있는 후보자에게만 할 수 있게 수정하겠습니다.
 
 ```
@@ -35,6 +37,7 @@ require는 안의 조건문을 만족할 때 이 후에 오는 명령문을 실�
 
 트러플 콘솔로 이동해서 동작을 확인해봅니다.
 아래 명령어는 정상동작 합니다.
+
 ```
 truffle consle
 Voting.deployed().then(function(ins){i=ins;});
@@ -44,6 +47,7 @@ i.vote(0);
 ```
 
 음수를 입력하거나 등록된 후보자의 수 이상을 입력하면 **revert**에러를 출력합니다.
+
 ```
 i.vote(-1);
 Error: VM Exception while processing transaction: revert
@@ -60,7 +64,7 @@ require 문구를 사용하는 이유는 조건을 만족할 때만 다음 명�
 
 ## voting Front 폼 작성하기
 폼을 index.html에 추가합니다.
-Vote 버튼을 클릭하면, App.vote()함수를 호출합니다. 
+Vote 버튼을 클릭하면, App.vote()함수를 호출합니다.
 그리고 return false;구문에 의해서 더 이상 진행을 하지 않고 멈춰있습니다.
 이 후 이벤트를 추가해서 이더리움 노드가 vote 트랜잭션을 수행하면 화면을 변경하는 구문을 추가할 것 입니다.
 
@@ -77,24 +81,24 @@ Vote 버튼을 클릭하면, App.vote()함수를 호출합니다.
       </table>
       <hr>
       <br>
-      <table class="table"> 
-        <thead> 
-          <th>Address</th> 
-          <th>Vote Right</th> 
-        </thead> 
-        <tbody class="voterList"></tbody> 
+      <table class="table">
+        <thead>
+          <th>Address</th>
+          <th>Vote Right</th>
+        </thead>
+        <tbody class="voterList"></tbody>
       </table>
     </div>
 
-    <form onsubmit="App.vote(); return false;"> 
-      <div class="form-group"> 
-        <label for="candidateSelect">Select Candidate</label> 
-        <select class="from-control" id="candidateSelect"></select> 
-      </div> 
+    <form onsubmit="App.vote(); return false;">
+      <div class="form-group">
+        <label for="candidateSelect">Select Candidate</label>
+        <select class="from-control" id="candidateSelect"></select>
+      </div>
       <button type="submit" class="btn btn-primary">Vote</button>
     </form>
 
-</div> 
+</div>
 ```
 
 ## app.js에 vote함수를 추가합니다.
@@ -102,6 +106,7 @@ Vote 버튼을 클릭하면, App.vote()함수를 호출합니다.
 ### render 함수를 수정합니다.
 
 중복으로 표시되는 것을 막기 위한 코드 candidateList.empty();candidateSelect.empty(); voterList.empty(); 를 추가하였습니다.
+
 투표할 때 후보자를 선택할 수 있게 render함수를 수정합니다.
 
 ```
@@ -130,7 +135,6 @@ render: function(){
       candidateList.empty();
       candidateSelect.empty();
 
-
       for(let i=0; i < candidateCount; i++){
 
         votingInstance.getCandidate(i).then(function(candidate){
@@ -142,8 +146,6 @@ render: function(){
           candidateSelect.append(candidateOpt);
         });
       }
-
-
       return votingInstance.getVoterCount();
     }).then(function(vCount){
       var voterCount = vCount.toNumber();
@@ -158,13 +160,13 @@ render: function(){
           voterList.append(voterTemp);
         });
       }
-
     }).then(function(){
       loader.hide();
       contents.show();
     });
   }
 ```
+위의 소스코드에서 주요 부분만 설명하도록 하겠습니다.
 
 후보자를 표시하는 부분에 해당 후보자를 투툐 셀렉트 요소를 option으로 추가합니다.
 for문안에 var i -> let i으로 변경하였습니다.
@@ -224,4 +226,4 @@ vote 버튼을 누른 후 모습
 
 ![vote 버튼 누른 후 화면](image/0802.png "Vote후 화면")
 
-정상적으로 투표가 완려됐는지 확인하려면 브라우저에 새로고침을 눌러서 확인할 수 있습니다.
+정상적으로 투표가 완료됐는지 확인하려면 브라우저에 새로고침을 눌러서 확인할 수 있습니다.
