@@ -41,6 +41,9 @@ contract Voting {
   }
 
   function addVoter (address _voter) public onlyOwner{
+    for(uint8 i =0; i < voterCount; i++){
+      require(_voter != voterList[i].voterAddress);
+    }
     voterList[voterCount] = Voter(_voter, true);
     voterCount++;
   }
